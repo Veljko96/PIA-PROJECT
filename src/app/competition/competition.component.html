@@ -1,0 +1,62 @@
+<div class="row pt-5 pb-5">
+    <div class="col col-sm-6 mx-auto">
+        <div class="card border-danger mb-3 rounded-0">
+            <div class="card-header">
+              <h3 class="mb-0">Competition Informations</h3>
+            </div>
+            <div class="card-body text-danger">
+              <div *ngIf='CompetitionData'>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Competition name: {{CompetitionData.Competition_Name}}</li>
+                  <li class="list-group-item">Description: {{CompetitionData.Description}}</li>
+                </ul>
+              </div>
+            </div>
+        </div>
+        <div class="card border-danger mb-3 rounded-0">
+          <div class="card-header">
+              <h3 class="mb-0">You can drop your CV and cover letter here</h3>
+          </div>
+          <div class="card-body text-danger">
+              <div >
+                  <form class="form" (ngSubmit)="applyForCompetition()" #competitionForm="ngForm">
+                      <div class="form-group">
+                          <label for="">Choose:</label>
+                          <div class="radio">
+                            <label for=""><input type="radio" 
+                                                [(ngModel)]="cover_letter_type" 
+                                                name="cover_letter_type" 
+                                                value="area_text"> Write cover letter</label>
+                          </div>
+                          <div class="radio">
+                            <label for=""><input type="radio" 
+                                                [(ngModel)]="cover_letter_type" 
+                                                name="cover_letter_type" 
+                                                value="pdf"> Drop pdf file</label>
+                          </div>
+                      </div>
+                      <div class="form-group" *ngIf="cover_letter_type == 'pdf'">
+                            <label for=""> insert File:</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="customFile2" (change)='insertFile($event)'/>
+                                    <label class="custom-file-label" for="customFile">{{apply_file!=undefined ? apply_file.name : 'Choose'}}</label>
+                                </div>
+                           
+                      </div>
+                      <div class="form-group" *ngIf="cover_letter_type == 'area_text'">
+                          <label for="">Please fill cover letter:</label>
+                          <textarea 
+                                #CoverLetter="ngModel" 
+                                [(ngModel)]="applyData.Cover_Letter" 
+                                name="cover_letter" 
+                                class="form-control rounded-0" 
+                          ></textarea>
+                          
+                      </div>
+                      <button type="submit" class="btn btn-primary float-right" [disabled]="(!competitionForm.valid)">Send</button>
+                  </form>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>

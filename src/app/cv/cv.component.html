@@ -1,0 +1,266 @@
+<div class="row mt-3">
+  <div class="col-sm-12">
+    <br/>
+           <h2>&nbsp; Edit CV</h2>
+  </div>
+</div>
+
+
+<div class="row mt-3">
+  <div class="col-sm-8">
+    <div class="jumbotron">
+        <form>
+        <div class="tab-content" id="v-pills-tabContent">
+            <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-1-tab">
+                <h4>Personal info</h4>
+                <br/>
+                <table class="table">
+                    <tr>
+                      <td>Fist name:</td>
+                      <td>
+                        <input type='text' class="form-control" [(ngModel)]='cvData.firstname' name='firstname' (change)='checkDiff()'/>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Last name:</td>
+                      <td>
+                        <input type='text' class="form-control" [(ngModel)]='cvData.lastname' name='lastname' (change)='checkDiff()'/>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Address:</td>
+                      <td>
+                        <input type='text' class="form-control" [(ngModel)]='cvData.address' name='address' (change)='checkDiff()'/>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>City:</td>
+                      <td>
+                        <input type='text' class="form-control" [(ngModel)]='cvData.city' name='city' (change)='checkDiff()'/>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Country:</td>
+                      <td>
+                        <input type='text' class="form-control" [(ngModel)]='cvData.country' name='country' (change)='checkDiff()'/>
+                      </td>
+                    </tr>
+                    <tr>
+                        <td>Phone:</td>
+                        <td>
+                          <input type='text' class="form-control" [(ngModel)]='cvData.phone' name='phone' (change)='checkDiff()'/>
+                        </td>
+                      </tr>
+                    <tr>
+                      <td>Email:</td>
+                      <td>
+                        <input type='text' class="form-control" [(ngModel)]='cvData.email' name='email' (change)='checkDiff()'/>
+                      </td>
+                    </tr>
+                    <tr>
+                        <td>Website/Blog:</td>
+                        <td>
+                          <input type='text' class="form-control" [(ngModel)]='cvData.website' name='website' (change)='checkDiff()'/>
+                        </td>
+                    </tr>
+                  </table>
+            </div>
+            <div class="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-2-tab">
+                <h4>Application type</h4>
+                <br/>  
+              <table class="table">
+                  <tr>
+                    <td>Type of application:</td>
+                    <td>
+                      <select name="types" class="custom-select"  [(ngModel)]='cvData.type_application' (change)='checkDiff()'>
+                          <option selected value="Job applied for">Job applied for</option>
+                          <option value="Position">Position</option>
+                          <option value="Preferred job">Preferred job</option>
+                          <option value="Studies applied for">Studies applied for</option>
+                          <option value="Personal statement">Personal statement</option>
+                      </select>
+                    </td>                                      
+                  </tr>
+                  <tr>
+                    <td>Description:</td>
+                    <td>
+                      <input type='text' class="form-control" [(ngModel)]='cvData.type_description' name='description'  (change)='checkDiff()'/>
+                    </td>
+                  </tr>
+                </table>
+            </div>
+            <div class="tab-pane fade" id="v-pills-3" role="tabpanel" aria-labelledby="v-pills-3-tab">
+                <h4>Work experience</h4>
+                <br/>
+                <table  class="table">
+                  <tr>
+                    <td>From:</td>
+                    <td>
+                        <input type='date' class="form-control" [(ngModel)]='cvData.work_from' name="work_from"  (change)='checkDiff()'/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>To:</td>
+                    <td>
+                        <input type='date' class="form-control" [(ngModel)]='cvData.work_to' [disabled]="cvData.work_ongoing" name="work_to"  (change)='checkDiff()'/>
+                    </td>
+                  </tr>
+                  <tr>
+                      <td>Ongoing:</td>
+                      <td>
+                          <div class="custom-control custom-checkbox">
+                              <input type="checkbox" class="custom-control-input" id="customCheck1" name='work_ongoing'  [(ngModel)]='cvData.work_ongoing'  (change)='checkDiff()'/>
+                              <label class="custom-control-label" for="customCheck1">{{cvData.work_ongoing}}</label>
+                          </div>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>Position held:</td>
+                      <td>
+                        <input type='text' class="form-control" [(ngModel)]='cvData.work_title' name="work_title"  (change)='checkDiff()'/>
+                      </td>
+                  </tr>
+                </table>
+                <br/>                    
+                    <h5 style="color:gray">&nbsp;Employer</h5>
+                <br/>
+                <table class="table">
+                  <tr>
+                      <td>Name:</td>
+                      <td>
+                        <input type='text' class="form-control" [(ngModel)]='cvData.work_name' name="work_name"  (change)='checkDiff()'/>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>City:</td>
+                      <td>
+                        <input type='text' class="form-control" [(ngModel)]='cvData.work_city' name='work_city'  (change)='checkDiff()'/>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>Country:</td>
+                      <td>
+                        <input type='text' class="form-control" [(ngModel)]='cvData.work_country' name='work_country'  (change)='checkDiff()'/>
+                      </td>
+                  </tr>
+                  <tr>
+                    <td colspan="2">
+                      <p>Main activities and responsibilities</p>
+                      <div class="form-group">
+                          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" [(ngModel)]='cvData.work_text' name='work_text'  (change)='checkDiff()'></textarea>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+            </div>
+            <div class="tab-pane fade" id="v-pills-4" role="tabpanel" aria-labelledby="v-pills-4-tab">
+                <h4>Education and training</h4>
+                <br/>
+                <table class="table">
+                  <tr>
+                    <td>From:</td>
+                    <td>
+                        <input type='date' class="form-control" [(ngModel)]='cvData.education_from' name='education_from'  (change)='checkDiff()'/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>To:</td>
+                    <td>
+                        <input type='date' class="form-control" [(ngModel)]='cvData.education_to' [disabled]="cvData.education_ongoing" name='education_to'  (change)='checkDiff()'/>
+                    </td>
+                  </tr>
+                  <tr>
+                      <td>Ongoing:</td>
+                      <td>
+                          <div class="custom-control custom-checkbox">
+                              <input type="checkbox" class="custom-control-input" id="customCheck2" [(ngModel)]='cvData.education_ongoing' name='education_ongoing'  (change)='checkDiff()'/>
+                              <label class="custom-control-label" for="customCheck2">{{cvData.education_ongoing}}</label>
+                          </div>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>Title of qualification:</td>
+                      <td>
+                        <input type='text' class="form-control" [(ngModel)]='cvData.education_title' name='education_title'  (change)='checkDiff()'/>
+                      </td>
+                  </tr>
+                  </table>
+                  <br/>                    
+                      <h5 style="color:gray">&nbsp;Organisation providing education and training</h5>
+                  <br/>
+                  <table class="table">
+                  <tr>
+                      <td>Name:</td>
+                      <td>
+                        <input type='text' class="form-control" [(ngModel)]='cvData.education_name' name='education_name'  (change)='checkDiff()'/>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>City:</td>
+                      <td>
+                        <input type='text' class="form-control" [(ngModel)]='cvData.education_city' name='education_city'  (change)='checkDiff()'/>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>Country:</td>
+                      <td>
+                        <input type='text' class="form-control" [(ngModel)]='cvData.education_country' name='education_country'  (change)='checkDiff()'/>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td colspan="2">
+                        <p>Main activities and responsibilities</p>
+                        <div class="form-group">
+                            <textarea class="form-control" id="exampleFormControlTextarea2" rows="3" [(ngModel)]='cvData.education_text' name='education_text'  (change)='checkDiff()'></textarea>
+                        </div>
+                      </td>
+                  </tr>
+                </table>
+            </div>
+            <div class="tab-pane fade" id="v-pills-5" role="tabpanel" aria-labelledby="v-pills-5-tab">
+                <h4>Personal info</h4>
+                <br/>
+                <table class="table">
+                    <tr>
+                      <td>Mother tongues:</td>
+                      <td>
+                        <input type='text' class="form-control" [(ngModel)]='cvData.languages_mother' name='languages_mother' placeholder="First, Second, Third"  (change)='checkDiff()'/>
+                      </td>
+                    </tr>
+                    <tr>
+                        <td>Foreign tongues:</td>
+                        <td>
+                          <input type='text' class="form-control" [(ngModel)]='cvData.languages_foreign' name='languages_foreign' placeholder="First, Second, Third"  (change)='checkDiff()'/>
+                        </td>
+                      </tr>
+                      <tr>
+                          <td colspan="2">
+                            <p>Communication/ Organisational/ Digital skills</p>
+                            <div class="form-group">
+                                <textarea class="form-control" id="exampleFormControlTextarea3" rows="3" [(ngModel)]='cvData.skills' name='skills'  (change)='checkDiff()'></textarea>
+                            </div>
+                          </td>
+                      </tr>
+                  </table>
+            </div>
+          </div>
+      </form>   
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="jumbotron">
+        <div class="nav flex-column nav-pills red" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <a class="nav-link active" id="v-pills-1-tab" data-toggle="pill" href="#v-pills-1" role="tab" aria-controls="v-pills-1" aria-selected="true">Personal information</a>
+            <a class="nav-link" id="v-pills-2-tab" data-toggle="pill" href="#v-pills-2" role="tab" aria-controls="v-pills-2" aria-selected="false">Application type</a>
+            <a class="nav-link" id="v-pills-3-tab" data-toggle="pill" href="#v-pills-3" role="tab" aria-controls="v-pills-3" aria-selected="false">Work experience</a>
+            <a class="nav-link" id="v-pills-4-tab" data-toggle="pill" href="#v-pills-4" role="tab" aria-controls="v-pills-4" aria-selected="false">Education and Training</a>
+            <a class="nav-link" id="v-pills-5-tab" data-toggle="pill" href="#v-pills-5" role="tab" aria-controls="v-pills-5" aria-selected="false">Personal skills</a>
+        </div>
+    </div>
+    <button type="button" [disabled]="!upload" class="btn btn-danger btn-lg btn-block mb-3" (click)='saveCV()'>Save CV</button>
+    <div class="alert alert-warning mb-3" role="alert" *ngIf="saved_cv==null">CV not saved yet.</div>
+    <div class="alert alert-warning mb-3" role="alert" *ngIf="difference">Please update CV to save changes!</div>
+    <div class="alert alert-success mb-3" role="alert" *ngIf="saved_cv!=null">Nice! You saved your CV.</div>
+    <div class="alert alert-warning mb-3" role="alert" *ngIf="!upload">Admin needs first to approve CV update</div>
+</div>
+</div>

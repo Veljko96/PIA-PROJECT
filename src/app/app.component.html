@@ -1,0 +1,70 @@
+<!---------------------- NAVBAR ---------------------->
+<nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+	<a class="navbar-brand" routerLink="">JobFair</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarNavDropdown">
+		<ul class="navbar-nav mr-auto">
+			<li class="navbar-item">
+				<a class="nav-link" routerLink="/myCompetitions" routerLinkActive="active" *ngIf="authService.loggedIn() && authService.isStudent() && !authService.isAdmin()">Home</a>
+			</li>
+			<li class="navbar-item" *ngIf="authService.loggedIn() && !authService.isStudent() && !authService.isAdmin()">
+					<a class="nav-link" routerLink="/createCompetition" routerLinkActive="active">Create Competiton</a>
+			</li>
+			<li class="navbar-item" *ngIf="authService.loggedIn() && authService.isStudent() && !authService.isAdmin()">
+				<a class="nav-link" routerLink="/cv" routerLinkActive="active">CV</a>
+			</li>
+			<li class="navbar-item" *ngIf="authService.loggedIn() && authService.isStudent() && !authService.isAdmin()">
+					<a class="nav-link" routerLink="/search" routerLinkActive="active">Search</a>
+			</li>
+			<li class="navbar-item" *ngIf="authService.loggedIn() && !authService.isStudent() && !authService.isAdmin()">
+					<a class="nav-link" routerLink="/myApplications" routerLinkActive="active">Competitions</a>
+			</li>
+			<li class="navbar-item" *ngIf="authService.loggedIn() && authService.isAdmin()">
+					<a class="nav-link" routerLink="/setTime" routerLinkActive="active">Set Time</a>
+			</li>
+			<li class="navbar-item" *ngIf="authService.loggedIn() && authService.isAdmin()">
+					<a class="nav-link" routerLink="/createFair" routerLinkActive="active">Create Fair</a>
+			</li>
+			<li class="navbar-item" *ngIf="!authService.loggedIn()">
+					<a class="nav-link" routerLink="/guest" routerLinkActive="active">Guest Search</a>
+			</li>
+			<!--<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown">
+					Dropdown link
+				</a>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="#">Action</a>
+					<a class="dropdown-item" href="#">Another action</a>
+					<a class="dropdown-item" href="#">Something else here</a>
+				</div>
+			</li>-->
+		</ul>
+		<ul class="navbar-nav">
+			<li class="navbar-item" *ngIf="!authService.loggedIn()"> 
+				<a class="nav-link" routerLink="/login" routerLinkActive="active">Login</a>
+      </li>
+      <li class="navbar-item" *ngIf="!authService.loggedIn()">
+        <a class="nav-link" routerLink="/register" routerLinkActive="active">Register</a>
+			</li>
+			<li class="navbar-item" *ngIf="authService.loggedIn()">
+					<a class="nav-link" href="" (click)="authService.logoutUser()">Logout</a>
+				</li>
+		</ul>
+	</div>
+</nav>
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col col-sm-12">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>  
+</section>
+<footer>
+  <div class="bg-danger text-center">
+    © Illuminated
+  </div>
+</footer>

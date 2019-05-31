@@ -1,0 +1,49 @@
+<div class="row pt-5 pb-5">
+    <div class="col col-sm-6 mx-auto">
+      <div class="card rounded-0">
+        <div class="card-header">
+          <h3 class="mb-0">Set Time</h3>
+        </div>
+        <div class="card-body">
+          <h4>Set Date For Company requests</h4>
+          <form class="form" #timeForm="ngForm">
+              <table class="table">
+                  <tr>
+                    <td>Date from:</td>
+                    <td colspan="2">
+                      <input type='date' [(ngModel)]='company_from_d' name='company_from_d' class="form-control" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Date to:</td>
+                    <td colspan="2">
+                      <input type='date' [(ngModel)]='company_to_d' name='company_to_d' class="form-control" />
+                    </td>
+                  </tr>
+                </table>
+                <input type="submit" class="btn btn-danger btn-block" (click)='setTimeCompany()'  value="Set"/>
+          </form>
+        </div>
+        <div class="card-body">
+            <h4>Set Date For CVs</h4>
+            <form class="form">
+                <table class="table">
+                    <tr>
+                      <td>Date from:</td>
+                      <td colspan="2">
+                        <input type='date' [(ngModel)]='student_from_d' name='student_from_d' class="form-control"/>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Date to:</td>
+                      <td colspan="2">
+                        <input type='date' [(ngModel)]='student_to_d' name='student_to_d' class="form-control"/>
+                      </td>
+                    </tr>
+                  </table>
+                  <input type="submit" class="btn btn-danger btn-block" (click)='setTimeCV()'  value="Set"/>
+            </form>
+          </div>
+      </div>
+    </div>
+</div>

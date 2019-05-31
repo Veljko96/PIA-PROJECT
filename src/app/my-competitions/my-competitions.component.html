@@ -1,0 +1,63 @@
+<div class="container">
+<div *ngFor="let competition of my_competitions">
+    
+  <div class="jumbotron mt-4">
+      <h2>{{competition.Competition_Name}}</h2> 
+       
+      <hr/>  
+
+      <table class="table table-striped">
+      <tr>
+          <td>
+          <b>
+              Company name:
+          </b>
+          </td>
+          <td>
+              {{competition.Company_Name}}
+          </td>
+      </tr>
+      <tr>
+              <td>
+                  <b>
+                  Competition description:
+              </b>
+              </td>
+              <td>
+                  {{competition.Description}}
+              </td>
+      </tr>
+      </table>
+  </div>
+
+
+
+  <div class="row">
+      
+      <div class="col-sm-6">   
+          <h4 style="color:red">Not Accepted, Sorry</h4> 
+          <hr/>
+          <div  *ngFor="let apply of applies">
+              <div class="card mb-3"   *ngIf="apply.Accepted=='declined' && apply.Competition_Id==competition._id">
+                      <div class="card-body">
+                              <h4 class="card-title"> {{apply.First_Name}} {{apply.Last_Name}}</h4>
+                      </div>
+              </div>
+          </div>
+      </div>
+
+      <div class="col-sm-6">   
+        <h4 style="color:green">Accepted, Welcome!</h4> 
+        <hr/>
+        <div  *ngFor="let apply of applies">
+            <div class="card mb-3" *ngIf="apply.Accepted=='accepted' && apply.Competition_Id==competition._id">
+                <div class="card-body">
+                    <h5 class="card-title"> {{apply.First_Name}} {{apply.Last_Name}}</h5>
+                </div>
+            </div>  
+        </div>       
+    </div>
+      
+  </div>
+</div>
+</div>

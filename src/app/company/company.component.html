@@ -1,0 +1,31 @@
+<div class="row pt-5 pb-5">
+  <div class="col col-sm-6 mx-auto">
+      <div class="card border-danger mb-3 rounded-0">
+          <div class="card-header">
+            <h3 class="mb-0">Company Informations</h3>
+          </div>
+          <div class="card-body text-danger">
+            <div *ngIf='CompanyData'>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">Company name: {{CompanyData.Company_Name}}</li>
+                <li class="list-group-item">Address: {{CompanyData.Address}}</li>
+                <li class="list-group-item">Web site: {{CompanyData.WEB}}</li>
+                <li class="list-group-item">Number of employees: {{CompanyData.Employees}}</li>
+              </ul>
+            </div>
+          </div>
+      </div>
+      <div class="card border-danger mb-3 rounded-0">
+        <div class="card-header">
+            <h3 class="mb-0">Company competitions </h3>
+        </div>
+        <div class="card-body text-danger">
+          <div *ngIf='CompetitionsData'>
+            <ul *ngFor='let data of CompetitionsData'>
+              <li><a [routerLink]="['/competition', data._id]">{{data.Competition_Name}}</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

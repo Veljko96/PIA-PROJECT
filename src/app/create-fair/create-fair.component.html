@@ -1,0 +1,311 @@
+<div class="container">
+<div class="row">
+  <div class="text-danger">
+    <div class="col-sm-12">
+        <form>
+            <div class="jumbotron" *ngIf="currentFair">
+                    <h3>Fair: {{currentFair.Fair_Name}} isn't finished</h3>
+                    <p>ERROR! Can't create new Fair while previous is still on</p>
+            </div>
+          
+          <div class="card mt-4">
+              
+              <div class="card-body" *ngIf="!currentFair">
+                  <h3 class="mt-3">Make new Fair</h3>  
+                 
+                  <mat-vertical-stepper>
+                    <mat-step label="Step 1">
+                      <br/>
+                      <h5>Fair info:</h5>
+                      <br/>
+                      <form>
+                        <table class="table">
+                            <tr>
+                                <td colspan="1"> Fair name:</td>
+                                <td colspan="3">
+                                  <input type='text' class="form-control" #Fair=ngModel [(ngModel)]='new_fair.Fair' name='fair_name' required/>
+                                </td>
+                                <td class="alert alert-danger" *ngIf="Fair.touched && !Fair.valid">Fair name required</td>
+                            </tr>
+                            <tr>
+                                <td> Informations:</td>
+                                <td>
+                                  <input type='text' class="form-control" [(ngModel)]='new_fair.About' name='informations' />
+                                </td>
+                                <td> Place:</td>
+                                <td>
+                                    <input type='text' class="form-control" [(ngModel)]='new_fair.Place' name='place' />
+                                </td>
+                            </tr>
+                            <tr>
+                              <td> From date:</td>
+                              <td>
+                                <input type='date' class="form-control" [(ngModel)]='new_fair.StartDate' name='from_date' />
+                              </td>
+                              <td> To date:</td>
+                              <td>
+                                <input type='date' class="form-control" [(ngModel)]='new_fair.EndDate' name='to_date' />
+                              </td>
+                            </tr>
+                            <tr>
+                                <td> From time:</td>
+                                <td>
+                                    <input type='time' class="form-control" [(ngModel)]='new_fair.StartTime' name='from_time' />
+                                </td>
+                                <td> To time:</td>
+                                <td>
+                                  <input type='time' class="form-control" [(ngModel)]='new_fair.EndTime' name='to_time' />
+                                </td>
+                            </tr>
+                      
+                            <tr>
+                                <td> Locations:</td>
+                                <td colspan="3">
+                                    <div class="form-group">
+                                        <label for="comm">Locations: ({{new_fair.Place}}):</label>
+                                        <textarea class="form-control" rows="5" id="comm" [(ngModel)]='locations_str' name='locations_str' (change)="addLoc()"></textarea>
+                                    </div>
+                                </td>
+                               
+                            </tr>
+                            <br/>
+                        <tr>
+                          <td> From file:</td>
+                          <td colspan="3">
+                              <div class="custom-file">
+                                  <input type="file" class="custom-file-input" id="customFile1" (change)='eventFileSelected($event)'/>
+                                  <label class="custom-file-label" for="customFile">{{fairinfo_file!=undefined ? fairinfo_file.name : 'Choose'}}</label>
+                              </div>
+                          </td>
+                        </tr>
+                        <br/>
+                      </table>
+                      </form>
+                    </mat-step>
+                    <mat-step label="Step 2">
+                        <br/>
+                        <h5>Step 2 informations:</h5>
+                        <br/>
+                        <form>
+                            <table class="table">                          
+                              <tr>
+                                <td> New JobFair logo:</td>
+                                <td >
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="customFile1" (change)='eventLogoPut($event)'/>
+                                        <label class="custom-file-label" for="customFile">{{logo_image!=undefined ? logo_image.name : 'Choose'}}</label>
+                                    </div>
+                                </td>
+                              </tr>
+                                <tr>
+                                    <td>Fair Slots:</td>
+                                    <td >
+                                        <div class="card mb-2" *ngFor="let slot of new_fair.Slots">
+                                                <div class="card-body">
+                                                    {{slot}} &nbsp;<button type="button" class="btn btn-danger btn-sm" (click)=removeThisSlot(slot)>Remove</button>
+                                                </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <input type='text' class="form-control" [(ngModel)]='Slot_Time' name='place' placeholder="Slot time"/>
+                                                <br/>
+                                                <select name="locations" class="custom-select mb-2"  [(ngModel)]='slot_locations'> 
+                                                        <option *ngFor="let loc of new_fair.Locations" [ngValue]="loc" >{{loc}}</option>
+                                                </select>
+                                                <input type="button" class="btn btn-danger btn-block btn-sm" (click)='addThisSlot()'  value="Add"/>
+                                            </div>
+                                        </div>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                      <td> Others:</td>
+                                      <td >
+                                          <div class="custom-file">
+                                              <input type="file" class="custom-file-input" id="customFile2" (change)='eventOtherImagesPut($event)'/>
+                                              <label class="custom-file-label" for="customFile">{{other_images!=undefined ? other_images.name : 'Choose'}}</label>
+                                          </div>
+                                      </td>
+                                    </tr>
+                          </table>
+                          </form>
+                    </mat-step>
+                    <mat-step label="Step 3">
+                        <br/>
+                        <h5>Please define all packages from File:</h5>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="customFile2" (change)='eventJSONFilePut($event)'/>
+                            <label class="custom-file-label" for="customFile">{{new_package_file!=undefined ? new_package_file.name : 'Choose'}}</label>
+                        </div>  
+                        <br/><br/>               
+                    </mat-step>
+                    <mat-step label="Final step">
+                        <br/>
+                        <h4>All Fair Informations:</h4>
+                        <br/>
+                        <h5>Fair info</h5>
+                        <table class="table">
+                            <tr>
+                                <th>
+                                    Fair Name
+                                </th>
+                                <td colspan="3">
+                                    {{new_fair.Fair}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Place
+                                </th>
+                                <td>
+                                    {{new_fair.Place}}
+                                </td>
+                                <th>
+                                    Informations
+                                </th>
+                                <td>
+                                    {{new_fair.About}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    From Date
+                                </th>
+                                <td>
+                                    {{new_fair.StartDate}}
+                                </td>
+                                <th>
+                                    To Date
+                                </th>
+                                <td>
+                                    {{new_fair.EndDate}}
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <th>
+                                    From Time
+                                </th>
+                                <td>
+                                    {{new_fair.StartTime}}
+                                </td>
+                                <th>
+                                    To Time
+                                </th>
+                                <td>
+                                    {{new_fair.EndTime}}
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                    <th>
+                                        Locations
+                                    </th>
+                                    <td colspan="3">
+                                        {{new_fair.Locations}}
+                                    </td>
+                                  
+                            </tr>
+                            <tr>
+                                <th>
+                                    Slots
+                                </th>
+                                <td colspan="3">
+                                    {{new_fair.Slots.toString()}}
+                                </td>
+                                    
+                            </tr>    
+                        </table>
+                        <h5>Packages</h5>
+                        <div *ngFor="let p of new_fair.Packages">
+                            <div class="card mb-3">                        
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <b>{{p.Title}}</b>
+                                    </h5>
+                                    <br/>
+                                <table class="table">
+                                        <tr>
+                                            <th>
+                                                Content
+                                            </th>
+                                            <td colspan="7"> 
+                                                {{p.Content}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <th>
+                                                    VideoPromotion
+                                                </th>
+                                                <td>
+                                                    {{p.VideoPromotion}}
+                                                </td>
+                                                <th>
+                                                    NoLessons
+                                                </th>
+                                                <td>
+                                                    {{p.NoLessons}}
+                                                </td>
+                                                <th>
+                                                    NoWorkchops
+                                                </th>
+                                                <td>
+                                                    {{p.NoWorkchops}}
+                                                </td>
+                                                <th>
+                                                    NoPresentation
+                                                </th>
+                                                <td>
+                                                    {{p.NoPresentation}}
+                                                </td>                                
+                                            </tr> 
+                                            <tr>
+                                                <th>
+                                                    Price
+                                                </th>
+                                                <td>
+                                                    {{p.Price}}
+                                                </td>
+                                                <th>
+                                                    MaxCompanies
+                                                </th>
+                                                <td>
+                                                    {{p.MaxCompanies}}
+                                                </td>          
+                                            </tr>                       
+                                    </table>
+                                </div>
+                            </div>                       
+                        </div>
+                        <hr/>
+                        <h4>Extras </h4>
+                        <div *ngFor="let a of new_fair.Additional">
+                                <div class="card mb-3">                        
+                                    <div class="card-body">
+                                        <p><b>{{a.Title}}</b></p>
+                                        <p>Price: {{a.Price}}</p>
+                                    </div>
+                                </div>
+                        </div>
+                        <input type="submit" class="btn btn-danger btn-block btn-lg" (click)='createNewFair()'  value="Create Fair"/>
+                    </mat-step>
+                  </mat-vertical-stepper>
+                  <br/>
+              </div>
+          </div>
+      </form>
+     
+        <br/>
+        <div class="alert alert-danger mb-3" role="alert" *ngIf="Error_Message!=undefined">
+            {{Error_Message}}
+        </div>
+        <div class="alert alert-danger mb-3" role="alert" *ngIf="Info_Message!=undefined">
+            {{Info_Message}}
+        </div>
+        <div class="alert alert-danger mb-3" role="alert" *ngIf="AboutPackageMessage!=undefined">
+            {{AboutPackageMessage}}
+        </div>
+    
+  </div>
+</div>
+</div>
+</div>

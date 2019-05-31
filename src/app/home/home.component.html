@@ -1,0 +1,22 @@
+<div class="row pt-5 pb-5">
+    <div class="col col-sm-6 mx-auto">
+        <div *ngIf='AppliesData'>
+            <table class="table table-stripped table-bordered">
+              <thead>
+                <tr>
+                  <th>Competition name</th>
+                  <th>Is Accepted</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor='let data of AppliesData'>
+                    <td>{{data.Competition_Name}}</td>
+                    <td class="table-success" *ngIf="data.Accepted == 'Yes'">Accepted</td>
+                    <td class="table-danger" *ngIf="data.Accepted == 'No'">Not accepted</td>
+                    <td class="table-warning" *ngIf="data.Accepted == 'Applied'">Still waiting</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+      </div>
+    </div>

@@ -1,0 +1,10 @@
+.nav-filter {
+	background-color:#444;
+}
+
+.nav-pills>li>a:hover {
+	background-color: #FF6699;
+}
+.nav-pills .open>a, .nav-pills .open>a:active, .nav-pills .open>a:focus{
+	background-color: #FF6699;
+}

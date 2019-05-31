@@ -1,0 +1,91 @@
+<div class="container">
+<div *ngFor="let competition of my_competitions; let i=index;">
+
+    
+  <div class="alert alert-warning mt-4">
+      <h2>{{competition.Competition_Name}}</h2> 
+      <p style="color:brown">expired</p>
+      <hr/>  
+
+      <table cellpadding="5">
+      <tr>
+          <td>
+              Company name: 
+          </td>
+          <td>
+              {{competition.Company_Name}}
+          </td>
+      </tr>
+      <tr>
+          <td>
+              Competition description:
+          </td>
+          <td colspan="3">
+              {{competition.Description}}
+          </td>
+      </tr>
+      <tr>
+          <td>
+              Competition deadline:
+          </td>
+          <td>
+              {{competition.DateTo.substring(1,24).toString()}}h
+          </td>
+          <td>
+              Competition results:
+          </td>
+          <td>
+              {{competition.End}}
+          </td>
+      </tr>
+      </table>
+  </div>
+  <button type="button" class="btn btn-warning btn-lg btn-block" (click) = "finishOffer(competition)">Publish</button>
+
+
+  <div *ngFor="let apply of applies">
+      <div class="row mt-2">
+          <div class="col-sm-12">   
+              <div >
+                  <div class="card mb-3" *ngIf="apply.Competition_Id==competition._id">
+                      <div class="card-body">
+                          <br/>
+                          <h4 class="card-title"> 
+                              <span *ngIf="apply.Accepted=='declined'" style="color:red">{{apply.First_Name}} {{apply.Last_Name}} </span>
+                              <span *ngIf="apply.Accepted=='accepted'" style="color:green">{{apply.First_Name}} {{apply.Last_Name}} </span>
+                              &nbsp;
+                              <button  *ngIf="apply.Accepted!='accepted'" type="button" class="btn btn-info" (click) = "changeStatus(apply,'accepted')">Accept</button>
+                              <button  *ngIf="apply.Accepted=='accepted'" type="button" class="btn btn-info" (click) = "changeStatus(apply,'declined')">Decline</button>
+                          </h4>
+                          <br/>
+                          <table cellpadding="3" class="table table-striped">
+                                  <tr>
+                                      <td>
+                                          <b>
+                                              Status:
+                                          </b>
+                                      </td>
+                                      <td>
+                                              {{apply.Accepted}}
+                                      </td>
+                                      <td>
+                                          <b>
+                                              Email:
+                                          </b>
+                                      </td>
+                                      <td>
+                                          {{apply.Email}}
+                                      </td>
+                                  </tr>
+                                  
+                          </table>
+                      </div>
+                  </div>  
+              </div>       
+          </div>
+
+          
+      </div>
+  </div>
+</div>
+</div>

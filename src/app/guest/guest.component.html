@@ -1,0 +1,69 @@
+<div class="row pt-5 pb-5">
+    <div class="col col-sm-6 mx-auto">
+      <div class="card rounded-0">
+        <div class="card-header">
+          <h3 class="mb-0">Search</h3>
+        </div>
+        <div class="card-body">
+          <form class="form" #searchForm="ngForm">
+            
+            <div class="form-group">
+                <label for="">Company name:</label>
+                <input type="text" 
+                      #CompanyName="ngModel" 
+                      [(ngModel)]="searchData.Company_Name" 
+                      name="company_name" 
+                      class="form-control rounded-0" 
+                      >
+            </div>
+            <div class="form-group">
+                <label for="">Activity:</label>
+                <select multiple #Activity="ngModel" 
+                        [(ngModel)]="activities" 
+                        name="activities" 
+                        class="form-control rounded-0" 
+                        required>
+                  <option value="IT">IT</option> 
+                  <option value="Telecomunications">Telecomunications</option> 
+                  <option value="Energetics">Energetics</option> 
+                  <option value="Construction and architecture">Construction and architecture</option>
+                  <option value="Mechanical engineering">Mechanical engineering</option>
+                </select>
+                
+            </div>
+            <div class="form-group">
+                <label for="">City:</label>
+                <input type="text" 
+                      #CompanyName="ngModel" 
+                      [(ngModel)]="searchData.City" 
+                      name="city" 
+                      class="form-control rounded-0" 
+                      >
+            </div>
+            <button (click)="search()" type="button" class="btn btn-success float-right">Search</button>
+          </form>
+        </div>
+      </div>
+      <div *ngIf='companiesData'>
+          <table class="table table-stripped">
+            <thead>
+              <tr>
+                <th>Company name</th>
+                <th>Address</th>
+                <td>Number of Employees</td>
+                <td>Web page</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor='let company of companiesData'>
+                <td>{{company["Company_Name"]}}</td>
+                <td>{{company["Address"]}}</td>
+                <td>{{company["Employees"]}}</td>
+                <td>{{company["WEB"]}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+    </div>
+  </div>
